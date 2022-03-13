@@ -1,0 +1,28 @@
+nav{
+    height:10vh;
+    border-bottom: 1px solid grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tools{
+    margin:3rem 1rem;
+}
+
+.map{
+    width: 500px;
+    height: 500px;
+    border:1px solid grey;
+}
+
+table td{
+    width: 25px;
+    height: 25px;
+    border:1px solid black;
+}
