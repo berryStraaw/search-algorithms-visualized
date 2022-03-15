@@ -77,38 +77,6 @@ addPanel.addEventListener('change',function(e){
 });
 
 
-/* DEBUG */
-/* function listAllEventListeners() {
-    const allElements = Array.prototype.slice.call(document.querySelectorAll('*'));
-    allElements.push(document);
-    allElements.push(window);
-  
-    const types = [];
-  
-    for (let ev in window) {
-      if (/^on/.test(ev)) types[types.length] = ev;
-    }
-  
-    let elements = [];
-    for (let i = 0; i < allElements.length; i++) {
-      const currentElement = allElements[i];
-      for (let j = 0; j < types.length; j++) {
-        if (typeof currentElement[types[j]] === 'function') {
-          elements.push({
-            "node": currentElement,
-            "type": types[j],
-            "func": currentElement[types[j]].toString(),
-          });
-        }
-      }
-    }
-  
-    return elements.sort(function(a,b) {
-      return a.type.localeCompare(b.type);
-    });
-  }
- */
-
 
 /* 
 mouse down detecting script
@@ -124,19 +92,29 @@ document.body.onmouseup = function() {
 }
 
 
+/* Event listener functions (defined for easy removal) */
+const clickEvent= function(e){
+    console.log(e.target);
+    e.target.innerHTML=e.target.id;
+};
+
+const holdEvent= function(e){
+    if(mouseDown==1){
+        console.log(e.target);
+    e.target.innerHTML=e.target.id;
+    }
+};
+
 /* add event listeners  */
 function addClickEvent(){
     var t=document.querySelectorAll("td");
     t.forEach((tile)=>{
-        tile.removeEventListener("click");
-        tile.removeEventListener("mouseover");
+        tile.removeEventListener("click",clickEvent);
+        tile.removeEventListener("mouseover",holdEvent);
     });
 
     t.forEach((tile)=>{
-        tile.addEventListener('click', (e)=>{
-            console.log(e.target);
-            e.target.innerHTML=e.target.id;
-        });
+        tile.addEventListener('click', clickEvent);
     });
 }
 
@@ -144,22 +122,14 @@ function addClickEvent(){
 function addHoldEvent(){
     var t=document.querySelectorAll("td");
     t.forEach((tile)=>{
-        /* tile.removeEventListener();
- */
+        tile.removeEventListener("click",clickEvent);
+        tile.removeEventListener("mouseover",holdEvent);
     });
 
     t.forEach((tile)=>{
-        tile.addEventListener('click', (e)=>{
-            console.log(e.target);
-            e.target.innerHTML=e.target.id;
-        });
+        tile.addEventListener('click', clickEvent);
     
-        tile.addEventListener('mouseover', (e)=>{
-            if(mouseDown==1){
-                console.log(e.target);
-            e.target.innerHTML=e.target.id;
-            }
-        });
+        tile.addEventListener('mouseover', holdEvent);
     });
 }
 
