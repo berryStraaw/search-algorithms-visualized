@@ -1,3 +1,5 @@
+
+
 /*     
     Potential alhorigthms:
 
@@ -12,6 +14,16 @@
 
 */
 
+
+/* tracking variables */
+let startChecker=0;
+let endChecker=0;
+let speed=50;
+let currentAlgo="breath";
+
+
+
+
 /* 
 Map size setter
 */
@@ -25,29 +37,41 @@ function setMap(size){
         let row=document.createElement("tr");
         for(let k=0; k<size; k++){
             let col=document.createElement("td");
-            id=[i,k]
+            let id=[i,k];
             col.id=id;
-            col.classList.add("empty")
+            col.classList.add("empty");
             row.appendChild(col);
         }
     table.appendChild(row);
     }
+    startChecker=0;
+    endChecker=0;
 }
 
 
+
+
 /* initial map setup on page load */
-setMap(50);
+setMap(35);
 
 /* 
 Map slider functionality
 */
-
 const slider= document.getElementById("mapSize");
 const output= document.getElementById("mapSizeOutput");
 
 slider.oninput=function(){
     output.innerHTML=this.value;
     setMap(this.value);
+}
+
+/* Speed slider functionality */
+const speedSlider= document.getElementById("speedSlider");
+const speedOutput= document.getElementById("speedOutput");
+
+speedSlider.oninput=function(){
+    speedOutput.innerHTML=this.value;
+    speed=this.value;
 }
 
 
@@ -83,25 +107,51 @@ mouse down detecting script
 */
 var mouseDown = 0;
 document.body.onmousedown = function() { 
-    console.log(mouseDown);
   ++mouseDown;
 }
 document.body.onmouseup = function() {
-    console.log(mouseDown);
   --mouseDown;
 }
 
 
 /* Event listener functions (defined for easy removal) */
 const clickEvent= function(e){
-    console.log(e.target);
-    e.target.innerHTML=e.target.id;
+    if(startBtn.checked) {
+        if(startChecker==0){
+         e.target.classList.toggle("start");   
+         startChecker=1;
+        }
+        else if(e.target.classList.contains("start")){
+            e.target.classList.toggle("start");   
+            startChecker=0;
+        }
+        else{
+            console.log("starting point has already been selected, remove the previous point to palce a new one")
+        }
+      }
+    if(end.checked) {
+        if(endChecker==0){
+           e.target.classList.toggle("end"); 
+           endChecker=1;
+        }
+        else if(e.target.classList.contains("end")){
+            e.target.classList.toggle("end"); 
+            endChecker=0;
+        }
+        else{
+            console.log("End point has already been selected, remove the previous point to palce a new one")
+        }
+    }
+    if(wall.checked) {
+        e.target.classList.toggle("wall");
+    }
 };
 
 const holdEvent= function(e){
     if(mouseDown==1){
-        console.log(e.target);
-    e.target.innerHTML=e.target.id;
+        if(wall.checked) {
+            e.target.classList.toggle("wall");
+        }
     }
 };
 
@@ -132,4 +182,23 @@ function addHoldEvent(){
         tile.addEventListener('mouseover', holdEvent);
     });
 }
+
+
+
+import Cell from './algorithms/breath.js';
+
+/* Runing script function */
+document.getElementById ("runBtn").addEventListener ("click", runSearch, false);
+
+function runSearch(){
+    console.log(`running with ${currentAlgo} algorithm with speed ${speed}`);
+    const startId=document.getElementsByClassName("start");
+    let id=startId[0].id.split(",");
+    id=[parseInt(id[0]),parseInt(id[1])];
+    let c1=new Cell(id);
+    console.log(c1);
+}
+
+
+
 

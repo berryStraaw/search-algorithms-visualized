@@ -4,6 +4,7 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
+    justify-content: space-evenly;
 }
 main{
     display: flex;
@@ -25,4 +26,16 @@ table td{
     width: 25px;
     height: 25px;
     border:1px solid black;
+}
+
+.start{
+    background-color: blue;
+}
+
+.end{
+    background-color: green;
+}
+
+.wall{
+    background-color: grey;
 }

@@ -5,38 +5,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
 
-        <script src="script.js" defer=""></script>
+        <script src="script.js"  type="module" defer=""></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <nav>
-            nav
+            <div class="addElements">
+                <span>Add blocks</span>
+                <div>
+                    <input type="radio" id="start" name="cell" value="start">
+                    <label for="start">Start</label> 
+                </div>
+                <div>
+                    <input type="radio" id="end" name="cell" value="end">
+                    <label for="End">End</label>
+                </div>
+                <div>
+                    <input type="radio" id="wall" name="cell" value="wall">
+                    <label for="wall">Wall</label>
+                </div>
+            </div>
+            <div class="mapSlider">
+                <label>Map size</label>
+                <input type="range" min="1" max="58" value="35" class="slider" id="mapSize">
+                <span id="mapSizeOutput">50</span>
+            </div>
+
+            <div class="algorithmSelector">
+                Select an algorithm
+            </div>
+
+            <div class="speedSlider">
+                <label>Speed</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="speedSlider">
+                <span id="speedOutput">50</span>
+            </div>
+
+            <div class="run">
+                <button type="button" id="runBtn" >Run</button> 
+            </div>
         </nav>
         <main>
             <div class="tools">
-                <div class="addElements">
-                    <span>Add blocks</span>
-                    <div>
-                       <input type="radio" id="start" name="cell" value="start">
-                        <label for="start">Start</label> 
-                    </div>
-                    <div>
-                        <input type="radio" id="end" name="cell" value="end">
-                        <label for="End">End</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="wall" name="cell" value="wall">
-                        <label for="wall">Wall</label>
-                    </div>
-                    
-
-                    
-                </div>
-                <div class="mapSlider">
-                    <label>Map size</label>
-                    <input type="range" min="1" max="58" value="35" class="slider" id="mapSize">
-                    <span id="mapSizeOutput">50</span>
-                </div>
+                
+                
 
             </div>
             <table>
